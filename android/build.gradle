@@ -4,31 +4,25 @@ version '1.0-SNAPSHOT'
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
-
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.3'
-    }
-}
-
-rootProject.allprojects {
-    repositories {
-        google()
-        jcenter()
+        classpath 'com.android.tools.build:gradle:8.1.1'
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    namespace = "sq.flutter.tflite"  // ✅ REQUIRED for AGP 8+
+    compileSdk = 34
 
     defaultConfig {
-        minSdkVersion 19
-        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        minSdk = 21
+        testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
     }
-    lintOptions {
+
+    lint {
         disable 'InvalidPackage'
     }
 
@@ -36,4 +30,9 @@ android {
         implementation 'org.tensorflow:tensorflow-lite:+'
         implementation 'org.tensorflow:tensorflow-lite-gpu:+'
     }
+}
+
+repositories {
+    google()
+    mavenCentral()
 }
